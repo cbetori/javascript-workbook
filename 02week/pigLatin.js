@@ -17,7 +17,8 @@ function pigLatin(word) {
 
     let letter = word.charAt(i);
 
-    if (letter == 'a' || letter == 'e' || letter == 'i' || letter == 'o' ||letter == 'u'){
+    if (letter == 'a' || letter == 'e' || letter == 'i' || letter == 'o' ||letter == 'u' ||
+    letter == 'A' || letter == 'E' || letter == 'I' || letter == 'O' ||letter == 'U'){
 
       remainingWord = remainingWord.substring(i, word.length)
       ordway = remainingWord + sub + 'ay';
@@ -32,9 +33,6 @@ function pigLatin(word) {
     } 
   }
 }
-
-
-
 
 function getPrompt() {
   rl.question('word ', (answer) => {
