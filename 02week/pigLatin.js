@@ -7,13 +7,32 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
-
 function pigLatin(word) {
+  let ordway
+  let letterCount = word.length;
+  let sub = '';
+  let remainingWord = word;
 
-  // Your code here
+  for (let i = 0; i < letterCount; i++){
 
+    let letter = word.charAt(i);
+
+    if (letter == 'a' || letter == 'e' || letter == 'i' || letter == 'o' ||letter == 'u' ||
+    letter == 'A' || letter == 'E' || letter == 'I' || letter == 'O' ||letter == 'U'){
+
+      remainingWord = remainingWord.substring(i, word.length)
+      ordway = remainingWord + sub + 'ay';
+      
+      return ordway
+
+    } else {
+  
+      remainingWord = remainingWord.substring(i-1, word.length)
+      sub += letter;
+
+    } 
+  }
 }
-
 
 function getPrompt() {
   rl.question('word ', (answer) => {
