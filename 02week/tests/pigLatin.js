@@ -16,32 +16,36 @@ function getPrompt() {
 getPrompt();
 
 function pigLatin(word){
-  let ordway
+  word = word.trim();
+  word = word.toLowerCase();
   let letterCount = word.length;
-  let sub = '';
   let remainingWord = word;
+
+  let returnWord
+  let sub = '';
+
   for (let i = 0; i < letterCount; i++){
 
     let letter = word.charAt(i);
 
-    if (letter == 'a' || letter == 'e' || letter == 'i' || letter == 'o' ||letter == 'u' ||
-    letter == 'A' || letter == 'E' || letter == 'I' || letter == 'O' ||letter == 'U'){
+    if (letter == 'a' || letter == 'e' || letter == 'i' || letter == 'o' ||letter == 'u'){
+      remainingWord = remainingWord.substring(i, letterCount)
 
-      remainingWord = remainingWord.substring(i, word.length)
+      if (word.charAt(0) == 'a' || word.charAt(0) == 'e' || word.charAt(0) == 'i' || word.charAt(0) == 'o' ||word.charAt(0) == 'u'){
 
-      if (word.charAt(0) == 'a' || word.charAt(0) == 'e' || word.charAt(0) == 'i' || word.charAt(0) == 'o' ||word.charAt(0) == 'u' ||
-      word.charAt(0) == 'A' || word.charAt(0) == 'E' || word.charAt(0) == 'I' || word.charAt(0) == 'O' ||word.charAt(0) == 'U'){
-      ordway = remainingWord + sub + 'yay';
+      returnWord = remainingWord + sub + 'yay';
       
-      return ordway
+      return returnWord
       } else {
-        ordway = remainingWord + sub + 'ay';
-        return ordway
+
+        returnWord = remainingWord + sub + 'ay';
+        return returnWord
+
       }
     
     } else {
 
-      remainingWord = remainingWord.substring(i-1, word.length)
+      remainingWord = remainingWord.substring(i-1, letterCount)
       sub += letter;
 
     } 
