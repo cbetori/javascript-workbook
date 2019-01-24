@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "start": "rockPaperScissors",
+    "test": "mocha"
+  },
+  "dependencies": {
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "mocha": "^5.2.0"
+  }
+}
