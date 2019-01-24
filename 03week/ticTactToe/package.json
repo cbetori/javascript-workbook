@@ -1,7 +1,7 @@
 {
     "scripts": {
-        "start": "getPrompt",
-        "test": "test"
+        "start": "ticTacToe.js",
+        "test": "mocha"
     },
     "dependencies": {
         "express": "^4.16.4"
