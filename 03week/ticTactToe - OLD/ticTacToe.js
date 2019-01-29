@@ -70,7 +70,6 @@ function diagonalWin() {
   }
 }
 
-
 function checkForWin() {
   if (horizontalWin() || verticalWin() || diagonalWin()) {
     console.log(playerTurn + ' Wins')
@@ -95,8 +94,7 @@ function getPrompt() {
   });
 };
 
-getPrompt();
-
+//getPrompt();
 
 module.exports= {
   ticTacToe,
