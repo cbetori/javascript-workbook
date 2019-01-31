@@ -7,7 +7,6 @@ let generateSolution = require('./mastermind').generateSolution;
 
 if (typeof describe === "function") {
   solution = "abcd";
-  guess = 'abcd';
   describe("#mastermind()", () => {
     it("should register a guess and generate hints", () => {
       mastermind("aabb");

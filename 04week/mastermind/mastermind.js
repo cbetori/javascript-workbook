@@ -10,9 +10,10 @@ let board = [];
 let solution = '';
 let letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
 
-function printBoard() {
+function printBoard(guess) {
+  board.push(guess)
   for (let i = 0; i < board.length; i++) {
-    console.log(board);
+    //console.log(board);
   }
 }
 
@@ -27,35 +28,46 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-function generateHint(solution, guess) {
-  let matchCheck = 0;
-  let indexCheck = 0;
-  for(let i=0; i<solution.length; i++){
-    for(let x=0; x<guess.length; i++){
-      if(solution[i] === guess[x]){
-        matchCheck = matchCheck + 1;
-        if(i === x){
-          indexCheck = indexCheck + 1;
-        }
-      }
+function generateHint(guess) {
+
+  let hint
+  let solutionArray = solution.split('');
+  let guessArray = guess.split('');
+  let correctLetterLocations = 0;
+  let correctLetter = 0;
+  let targetIndex = 0;
+
+  for (let i = 0; i < solutionArray.length; i++) {
+    if (solutionArray[i] === guessArray[i]) {
+      correctLetterLocations = correctLetterLocations + 1;
+      solutionArray[i] = null;
     }
   }
-  return matchCheck + '-' + indexCheck;
+  for (let i = 0; i < solutionArray.length; i++) {
+    targetIndex = guessArray.indexOf(solutionArray[i]);
+    if(targetIndex > -1){
+      correctLetter = correctLetter + 1;
+      solutionArray[i] = null;
+    }
+  }
+  console.log('Hint: '+ correctLetterLocations + '-' + correctLetter);
+  return correctLetterLocations + '-' + correctLetter;
 }
 
-function mastermind() {
+function mastermind(guess) {
   solution = 'abcd';
-  guess = 'abcd';
-  printBoard(board.push(solution));
-  if(guess === solution){
+
+  if (guess === solution) {
+    console.log("You guessed it!")
     return "You guessed it!"
-  }else{
-    generateHint()
+  } else {
+    console.log("Wrong")
+    generateHint(guess);
   }
-   // Comment this out to generate a random solution
+  printBoard(guess);
+  // Comment this out to generate a random solution
   // your code here
 }
-
 
 function getPrompt() {
   rl.question('guess: ', (guess) => {
@@ -65,7 +77,7 @@ function getPrompt() {
   });
 }
 
-module.exports={
+module.exports = {
   mastermind,
   board,
   generateHint,
