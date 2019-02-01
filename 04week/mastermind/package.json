@@ -1,0 +1,12 @@
+{
+    "scripts": {
+        "start": "start",
+        "test": "mocha"
+    },
+    "devDependencies": {
+        "mocha": "^5.2.0"
+    },
+    "dependencies": {
+        "colors": "^1.3.3"
+    }
+}
