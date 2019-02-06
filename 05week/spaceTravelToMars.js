@@ -9,7 +9,35 @@ let jobTypes = {
   programmer: 'Any Ship!'
 };
 
-// Your code here
+let CrewMember = function(name, job, specialSkill){
+  this.name = name, 
+  this.job = job,
+  this.specialSkill = specialSkill,
+  this.ship
+}
+
+let Ship = function(name, type, ability){
+  this.name = name,
+  this.type = type,
+  this.ability = ability,
+  this.crew = []
+}
+
+CrewMember.prototype.enterShip = function(ship){
+  //establish CrewMember.ship value
+  this.ship = ship;
+
+  //establish Ship.crew value
+  ship.crew = [this];
+}
+
+Ship.prototype.missionStatement = function(){
+  if(this.crew === []){
+    return "Can't perform a mission yet.";
+  }else{
+    return this.ability;
+  }
+}
 
 //tests
 if (typeof describe === 'function'){
@@ -27,8 +55,8 @@ if (typeof describe === 'function'){
       let crewMember1 = new CrewMember('Rick Martinez', 'pilot', 'chemistry');
       crewMember1.enterShip(mav);
       assert.equal(crewMember1.ship, mav);
-      assert.equal(mav.crew.length, 1);
       assert.equal(mav.crew[0], crewMember1);
+      assert.equal(mav.crew.length, 1);
     });
   });
 
@@ -57,3 +85,67 @@ if (typeof describe === 'function'){
     });
   });
 }
+
+
+//let crewMember1 = new CrewMember('Rick Martinez','pilot', 'chemistry', null);
+
+//console.log(crewMember1);
+
+// Ship.prototype.crewCounter = function(){
+//   for(let i = 0; i < CrewMember.length; i++){
+//     if(this.type === this.ship){
+//       return crew
+//     }
+//   }
+// }
+
+// CrewMember.prototype.enterShip = function(ship){
+//   this.ship.name = name 
+//   this.ship.type = type,
+//   this.ship.ability = ability,
+//   this.ship.crew = crew
+// }
+
+// CrewMember.prototype.crewCreator = function(){
+
+// }
+
+  // for(let i = 0; i < Object.keys(jobTypes).length; i++){
+  //   let key = Object.keys(jobTypes)[i];
+  //   let ship = jobTypes[key]
+  //   if(key === this.job){
+  //     this.ship = ship;
+  //   }
+  // }
+
+    //Ship.crew = CrewMember;
+  //establish Ship.crew value
+  // for(let i = 0; i < CrewMember.length; i++){
+  //   if(crewHandler[0] === undefined){
+  //     crew = null  
+  //     //return crew
+  //   }else{
+  
+  //     Ship.crew.push(this.CrewMember);
+
+  // Ship.prototype.test = function(thing){
+//   this.crew = ["test"]
+// }
+
+// Ship.prototype.addCrewtoShip = function(){
+//   console.log(CrewMember.length);
+//   for(let i = 0; i < CrewMember.length; i++){
+//     if(this.crew[0] === undefined){
+//       this.crew = [];  
+//       return this.crew
+//     }else {
+
+//     }
+//   }
+// }
+
+
+//let mav = new Ship('Mars Ascent Vehicle', 'MAV', 'Ascend into low orbit');
+
+
+//console.log(crewMember1.ship);
