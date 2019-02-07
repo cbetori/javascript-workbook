@@ -9,20 +9,17 @@ const rl = readline.createInterface({
 
 let count1 = 0;
 let count2 = 0;
-let reset = 0;
 
 function checkForWinner(hand1, hand2){
-  console.log(count2)
   if(count1 > 3 || count2 > 3){
     count1 = 0;
     count2= 0;
-  }else if (count1 >= 3){
+  }else if (count1 === 3){
     return "Game Over: Player One Wins";
-  }else if (count2 >= 3){
-    console.log("afdsaf")
+  }else if (count2 === 3){
     return "Game Over: Player Two Wins";
   }
-    return
+  return "No Ulitmate Winner"
 };
 
 function rockPaperScissors(hand1, hand2) {
@@ -60,11 +57,6 @@ function getPrompt() {
   });
 }
 
-function countReset(){
-    count1 = 0;
-    count2= 0;
-}
-
 // Tests
 
 if (typeof describe === 'function') {
@@ -85,13 +77,17 @@ if (typeof describe === 'function') {
       assert.equal(rockPaperScissors('rock ', 'sCiSsOrs'), "Hand one wins!");
     });
   });
+
+
   describe('checkForWinner()', () => {
     ///couldn't get counter to reset back to zero
-
     it('check winner after three games', () => {
-      assert.equal(checkForWinner('rock', 'paper'), undefined);
-      assert.equal(checkForWinner('rock', 'paper'), undefined);
-      assert.equal(checkForWinner('rock', 'paper'), "Game Over: Player Two Wins");
+      rockPaperScissors('rock', 'paper');
+      assert.equal(checkForWinner(), "No Ulitmate Winner");
+      rockPaperScissors('rock', 'paper');
+      assert.equal(checkForWinner(),"No Ulitmate Winner");
+      rockPaperScissors('rock', 'paper');
+      assert.equal(checkForWinner(), "Game Over: Player Two Wins");
     });
   });
 } else {
