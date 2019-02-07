@@ -2,14 +2,39 @@
 
 let assert = require('assert');
 
-let jobTypes = {
-  pilot: 'MAV',
-  mechanic: 'Repair Ship',
-  commander: 'Main Ship',
-  programmer: 'Any Ship!'
-};
+//Crew Constructor
+let CrewMember = function(name, job, specialSkill){
+  this.name = name, 
+  this.job = job,
+  this.specialSkill = specialSkill,
+  this.ship
+}
 
-// Your code here
+//Ship Constructor
+let Ship = function(name, type, ability){
+  this.name = name,
+  this.type = type,
+  this.ability = ability,
+  this.crew = []
+}
+
+//This connects Ship to a crew
+CrewMember.prototype.enterShip = function(ship){
+  //establish CrewMember.ship value
+  this.ship = ship;
+
+  //establish Ship.crew value
+  ship.crew = [this];
+}
+
+//Checks to see if a crew as been assigned 
+Ship.prototype.missionStatement = function(){
+  if(this.crew.length === 0 ){
+    return "Can't perform a mission yet.";
+  }else{
+    return this.ability;
+  }
+}
 
 //tests
 if (typeof describe === 'function'){
@@ -27,8 +52,8 @@ if (typeof describe === 'function'){
       let crewMember1 = new CrewMember('Rick Martinez', 'pilot', 'chemistry');
       crewMember1.enterShip(mav);
       assert.equal(crewMember1.ship, mav);
-      assert.equal(mav.crew.length, 1);
       assert.equal(mav.crew[0], crewMember1);
+      assert.equal(mav.crew.length, 1);
     });
   });
 
@@ -57,3 +82,11 @@ if (typeof describe === 'function'){
     });
   });
 }
+
+
+// let jobTypes = {
+//   pilot: 'MAV',
+//   mechanic: 'Repair Ship',
+//   commander: 'Main Ship',
+//   programmer: 'Any Ship!'
+// };
