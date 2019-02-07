@@ -2,13 +2,7 @@
 
 let assert = require('assert');
 
-let jobTypes = {
-  pilot: 'MAV',
-  mechanic: 'Repair Ship',
-  commander: 'Main Ship',
-  programmer: 'Any Ship!'
-};
-
+//Crew Constructor
 let CrewMember = function(name, job, specialSkill){
   this.name = name, 
   this.job = job,
@@ -16,6 +10,7 @@ let CrewMember = function(name, job, specialSkill){
   this.ship
 }
 
+//Ship Constructor
 let Ship = function(name, type, ability){
   this.name = name,
   this.type = type,
@@ -23,6 +18,7 @@ let Ship = function(name, type, ability){
   this.crew = []
 }
 
+//This connects Ship to a crew
 CrewMember.prototype.enterShip = function(ship){
   //establish CrewMember.ship value
   this.ship = ship;
@@ -31,8 +27,9 @@ CrewMember.prototype.enterShip = function(ship){
   ship.crew = [this];
 }
 
+//Checks to see if a crew as been assigned 
 Ship.prototype.missionStatement = function(){
-  if(this.crew === []){
+  if(this.crew.length === 0 ){
     return "Can't perform a mission yet.";
   }else{
     return this.ability;
@@ -87,65 +84,9 @@ if (typeof describe === 'function'){
 }
 
 
-//let crewMember1 = new CrewMember('Rick Martinez','pilot', 'chemistry', null);
-
-//console.log(crewMember1);
-
-// Ship.prototype.crewCounter = function(){
-//   for(let i = 0; i < CrewMember.length; i++){
-//     if(this.type === this.ship){
-//       return crew
-//     }
-//   }
-// }
-
-// CrewMember.prototype.enterShip = function(ship){
-//   this.ship.name = name 
-//   this.ship.type = type,
-//   this.ship.ability = ability,
-//   this.ship.crew = crew
-// }
-
-// CrewMember.prototype.crewCreator = function(){
-
-// }
-
-  // for(let i = 0; i < Object.keys(jobTypes).length; i++){
-  //   let key = Object.keys(jobTypes)[i];
-  //   let ship = jobTypes[key]
-  //   if(key === this.job){
-  //     this.ship = ship;
-  //   }
-  // }
-
-    //Ship.crew = CrewMember;
-  //establish Ship.crew value
-  // for(let i = 0; i < CrewMember.length; i++){
-  //   if(crewHandler[0] === undefined){
-  //     crew = null  
-  //     //return crew
-  //   }else{
-  
-  //     Ship.crew.push(this.CrewMember);
-
-  // Ship.prototype.test = function(thing){
-//   this.crew = ["test"]
-// }
-
-// Ship.prototype.addCrewtoShip = function(){
-//   console.log(CrewMember.length);
-//   for(let i = 0; i < CrewMember.length; i++){
-//     if(this.crew[0] === undefined){
-//       this.crew = [];  
-//       return this.crew
-//     }else {
-
-//     }
-//   }
-// }
-
-
-//let mav = new Ship('Mars Ascent Vehicle', 'MAV', 'Ascend into low orbit');
-
-
-//console.log(crewMember1.ship);
+// let jobTypes = {
+//   pilot: 'MAV',
+//   mechanic: 'Repair Ship',
+//   commander: 'Main Ship',
+//   programmer: 'Any Ship!'
+// };
