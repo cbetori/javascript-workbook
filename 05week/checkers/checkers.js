@@ -8,6 +8,7 @@ const rl = readline.createInterface({
 
 
 function Checker(color) {
+  //Set the symbol of each symbol
   if(color === 'white'){
     this.symbol = String.fromCharCode(0x125CB);
   }else{
@@ -57,6 +58,7 @@ class Board {
     console.log(string);
   }
     createCheckers() {
+        //Checkers location at the start of a new game
         let position = {
           white:[
             [0, 1], [0, 3], [0, 5], [0, 7],
@@ -69,7 +71,7 @@ class Board {
             [7, 0], [7, 2], [7, 4], [7, 6]
           ], 
         }
-
+        //Places the pieces onto the board
         for (let color in position){
             for (let location of position[color]){
               //Initiate a new Checker and pass in the color
@@ -90,9 +92,11 @@ class Board {
     //return removeChecker;
   }
   killChecker(position) {
+    //Set the killed piece to a blank space
     this.grid[position[0]][position[1]] = ''
-
+    //Store index of checker in checkers array
     let removeChecker = this.checkers.indexOf(this.grid[position[0]][position[1]])
+    //Remove checker from array in order to count pieces on board
     this.checkers.splice(removeChecker,1);
   }
 }
@@ -106,13 +110,15 @@ class Game {
     this.board.createCheckers();
   }
   moveChecker(start, end){
+    //Move checker
     this.board.selectChecker(start, end);
+    //See if player moved up two rows indicating they jumped the other player
     if ((Math.abs(start[0]-end[0])) === 2){
-
+      //Get the posistion the jumped checker
       let newRow = ((parseFloat(start[0])+parseFloat(end[0]))/2);
       let newColumn = ((parseFloat(start[1])+parseFloat(end[1]))/2);
       let newPosition = [newRow,newColumn]
-
+      //Remove it from board and checkers array
       this.board.killChecker(newPosition);
     }
   }
