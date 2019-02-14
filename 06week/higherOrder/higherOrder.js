@@ -2,41 +2,48 @@
 
 
 function forEach(arr, callback) {
-  arr.forEach(() => {
-    callback()
-  });
-  return
+  for (let i = 0; i < arr.length; i++){
+    callback(arr)
+  }
 }
 
+
 function map(arr, callback) {
-  let mapped = []
-  arr.map((num)=>{
-    mapped.push(num * num);
-  });
-  return mapped
+  let newArray = []
+  for (let i = 0; i < arr.length; i++){
+    let newNum = callback(arr[i])
+    newArray.push(newNum)
+
+  }
+  return newArray;
 }
 
 function filter(arr, callback) {
-  let filtered = arr.filter((num)=>{
-    return num % 2 === 0 ;
-  })
-  return filtered
+  let newArray = []
+  for (let i = 0; i < arr.length; i++){
+    if(callback(arr[i]) == true){
+      newArray.push(arr[i])
+    };
+  }
+  return newArray
 }
 
 function some(arr, callback) {
-  let somed = arr.some((num) => {
-      callback(num);
-      return num % 2 === 0 ; 
-  });
-  return somed
+  for (let i = 0; i < arr.length; i++){
+    if(callback(arr[i]) == true){
+      return true
+    }
+  }
+  return false
 }
 
 function every(arr, callback) {
-  let everied = arr.every((num) =>{
-    callback(num);
-    return num % 2 === 0;
-  })
-  return everied
+  for (let i = 0; i < arr.length; i++){
+    if(callback(arr[i]) == false){
+      return false;
+    }
+  }
+  return true
 }
 
 module.exports = {
