@@ -6,6 +6,7 @@ const rl = readline.createInterface({
 });
 function getPrompt() {
     grid();
+    Checker.prototype.createChecker.map();
     rl.question('which piece?: ', (whichPiece) => {
       rl.question('to where?: ', (toWhere) => {
         game.moveChecker(whichPiece, toWhere);
@@ -43,6 +44,11 @@ let viewGrid = function(){
 };
 
 /////////////////////////////////////////////////////////////////////////////////
+let red = [ 
+    [0, 1], [0, 3], [0, 5], [0, 7],
+    [1, 0], [1, 2], [1, 4], [1, 6],
+    [2, 1], [2, 3], [2, 5], [2, 7]
+    ]
 let checkersStartPosition = function(arg){
     let red = [ 
         [0, 1], [0, 3], [0, 5], [0, 7],
@@ -58,14 +64,18 @@ let checkersStartPosition = function(arg){
 }
 
 let Checker = function(){
-    this.color = null;
+    this.color = null
     this.location = null
-    this.kinged = false;
+    this.kinged = false
 }
-Checker.prototype.createChecker = function(arg){
-    // for(let i = 0; i<checkersStartPosition.){
-        
-    // }
+Checker.prototype.createChecker = function(){
+    //for(let i = 0; i<1; i++){
+        console.log("test")
+    red.map((element, index) => {
+        let checker = new Checker();
+        checker.color = "red"
+        console.log("tesst")
+    })
 }
 /////////////////////////////////////////////////////////////////////////////////
 let handleChecker = function(){
@@ -81,4 +91,11 @@ let handleKing =  function(){
 }
 /////////////////////////////////////////////////////////////////////////////////
 
-getPrompt();
+// getPrompt();
+
+// let x = [12, 99, 5, 30];
+
+// let gt = n => m=> n<m;
+// let y = x.filter(gt(20))
+
+// console.log(y)
