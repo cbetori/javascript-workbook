@@ -3,11 +3,13 @@
 class TicTacToe extends React.Component {
   constructor(props) {
     super(props);
+    //this.playValue = ['', '', '', '', '', '', '', '', ''],
+    this.player = ''
     this.state = {
-      values: [
-        '', '', '', '', '', '', '', '', ''
-      ],
+       playValue : ['', '', '', '', '', '', '', '', ''],
+    //     player: 'X'
     }
+    //this.playValue = ['', '', '', '', '', '', '', '', '']
     this.winState = [
       //Horizontal Win
       [0, 1, 2],
@@ -21,33 +23,44 @@ class TicTacToe extends React.Component {
       [0, 4, 8],
       [2, 4, 6]
     ]
-    this.player = ""
   }
 
   render() {
-
     return (
       <div>
         <div id='status'>Time to start, X goes first</div>
-        <div className="row">
-          <div id='square0' className='sqaure' onClick={() => this.createPlayer(0)} data-cell='0'>{this.state.values[0]}</div>
-          <div id='square1' className='sqaure' onClick={() => this.createPlayer(1)} data-cell='1'>{this.state.values[1]}</div>
-          <div id='square2' className='sqaure' onClick={() => this.createPlayer(2)} data-cell='2'>{this.state.values[2]}</div>
+        <div className='row'>
+            {this.createBoard(0)}
+            {this.createBoard(1)}
+            {this.createBoard(2)}
         </div>
-        <div className="row">
-          <div id='square3' className='sqaure' onClick={() => this.createPlayer(3)} data-cell='3'>{this.state.values[3]}</div>
-          <div id='square4' className='sqaure' onClick={() => this.createPlayer(4)} data-cell='4'>{this.state.values[4]}</div>
-          <div id='square5' className='sqaure' onClick={() => this.createPlayer(5)} data-cell='5'>{this.state.values[5]}</div>
+        <div className='row'>
+            {this.createBoard(3)}
+            {this.createBoard(4)}
+            {this.createBoard(5)}
         </div>
-        <div className="row">
-          <div id='square6' className='sqaure' onClick={() => this.createPlayer(6)} data-cell='6'>{this.state.values[6]}</div>
-          <div id='square7' className='sqaure' onClick={() => this.createPlayer(7)} data-cell='7'>{this.state.values[7]}</div>
-          <div id='square8' className='sqaure' onClick={() => this.createPlayer(8)} data-cell='8'>{this.state.values[8]}</div>
+        <div className='row'>
+            {this.createBoard(6)}
+            {this.createBoard(7)}
+            {this.createBoard(8)}
         </div>
+        <button onClick={()=> this.clearBoard()}>Clear Board</button>
       </div>
     );
   }
 
+    createBoard(i){
+        return(
+            <div 
+            id={'square'+i}
+            className='sqaure' 
+            onClick={() => this.playChecker(i)} 
+            data-cell='0'>
+            {this.state.playValue[i]}
+            </div>
+        )   
+    }
+  
   status() {
     let statusBar = document.getElementById('status')
     if(this.player === ''){
@@ -59,18 +72,25 @@ class TicTacToe extends React.Component {
 
   playerTurn() {
     if (this.player === 'X') {
-      this.player = 'O'
+        this.player='O'
     } else {
-      this.player = 'X'
+        this.player = 'X'
     }
     return this.player
   }
-  createPlayer(num) {
-    let squareValue = document.getElementById('square' + num)
-    if (squareValue.innerHTML === '') {
+
+  playChecker(num) {
+   // let squareValue = document.getElementById('square' + num)
+   let squareValue = this.state.playValue[num]
+    if (squareValue === '') {
       this.status()
       this.playerTurn()
-      squareValue.innerText = this.player
+      //console.log(this.state.player)
+      let newPlayValue = this.state.playValue.slice()
+      newPlayValue[num] = this.player
+      this.setState({playValue: newPlayValue})
+      //this.setState(prevState => ({playValue: [...prevState.playValue, this.player]}))
+     // console.log(this.state.playValue)
       this.checkWinner()
     }
   }
@@ -103,7 +123,13 @@ class TicTacToe extends React.Component {
     }
   }
 
-}
+  clearBoard(){
+    console.log(this.playValue)
+    let newPlayValue = ['', '', '', '', '', '', '', '', '']
+    this.playValue= newPlayValue
+   
+  }
 
+}
 
 ReactDOM.render(<TicTacToe />, document.getElementById('tic-tac-toe'));
