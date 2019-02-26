@@ -7,20 +7,20 @@ class TicTacToe extends React.Component {
       values: [
         '', '', '', '', '', '', '', '', ''
       ],
-      winState: [
-        [0, 1, 2],
-        [3, 4, 5],
-        [6, 7, 8],
-
-        [0, 3, 6],
-        [1, 4, 7],
-        [2, 5, 8],
-
-        [0, 4, 8],
-        [2, 4, 6],
-        [null, null, null]
-      ]
     }
+    this.winState = [
+      //Horizontal Win
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      //Verticle Win
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      //Diagonal Win
+      [0, 4, 8],
+      [2, 4, 6]
+    ]
     this.player = ""
   }
 
@@ -53,7 +53,7 @@ class TicTacToe extends React.Component {
     if(this.player === ''){
       statusBar.innerText = "It is O's turn"
     }else{
-    statusBar.innerText = "It is " +  this.player + "'s turn"
+      statusBar.innerText = "It is " +  this.player + "'s turn"
     }
   }
 
@@ -75,37 +75,68 @@ class TicTacToe extends React.Component {
     }
   }
   checkWinner() {
+    for (let i = 0; i < this.winState.length; i++) {
 
-    let winArray = this.state.winState
-    let counter = 0;
-    let xWIN = 0
-    let oWin = 0
-    winArray.map((element, num) => {
+      let xWin = 0
+      let oWin = 0
 
-      console.log(element)
-      xWIN = 0
-      oWin = 0
-      counter = 0
-      element.map((subElement, index) => {
-        let square = document.getElementById('square' + index).innerHTML
-        let square2 = document.getElementById('square' + num)
+      for (let x = 0; x < this.winState[i].length; x++){
 
-        if (square === 'X') {
-         // console.log(xWIN)
-          xWIN = xWIN + 1
+        let position = this.winState[i][x];
+        let square = document.getElementById('square' + position).innerHTML
+
+        if(square === "X"){
+          xWin = xWin +1
+          if(xWin === 3){
+            console.log("X WINS")
+            document.getElementById('status').innerText = "X Wins"
+          }
           
-        console.log(xWIN)
-        } else if (square === 'O') {
+        }else if(square === "O"){
           oWin = oWin + 1
+          if(oWin === 3){
+            console.log("O WINS")
+            document.getElementById('status').innerText = "O Wins"
+          }
         }
-        // if(counter === 2){
-        //  xWIN = 0
-        //  oWin = 0
-        // }
-        counter = counter + 1
-      })
-    })
+      }
+    }
   }
+      
+      // if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+      //   console.log(squares[a])
+      //   return squares[a];
+      // }
+    // let winArray = this.winState
+    // let counter = 0;
+    // let xWIN = 0
+    // let oWin = 0
+    // winArray.map((element, num, bigarray) => {
+    //   xWIN = 0
+    //   oWin = 0
+    //   counter = 0
+
+    //   element.map((subElement, index, array) => {
+    //     console.log(subElement[index])
+    //     let square = document.getElementById('square' + num).innerHTML
+    //     let square2 = document.getElementById('square' + num)
+        
+    //     if (square === 'X') {
+    //      // console.log(xWIN)
+    //       xWIN = xWIN + 1
+          
+
+    //     } else if (square === 'O') {
+    //       oWin = oWin + 1
+    //     }
+    //     // if(counter === 2){
+    //     //  xWIN = 0
+    //     //  oWin = 0
+    //     // }
+    //     counter = counter + 1
+    //   })
+
 }
+
 
 ReactDOM.render(<TicTacToe />, document.getElementById('tic-tac-toe'));
