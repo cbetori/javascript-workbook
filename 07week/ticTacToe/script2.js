@@ -3,13 +3,13 @@
 class TicTacToe extends React.Component {
   constructor(props) {
     super(props);
-    //this.playValue = ['', '', '', '', '', '', '', '', ''],
-    this.player = ''
+
     this.state = {
        playValue : ['', '', '', '', '', '', '', '', ''],
-    //     player: 'X'
+       player: 'X',
+       winner: ''
     }
-    //this.playValue = ['', '', '', '', '', '', '', '', '']
+
     this.winState = [
       //Horizontal Win
       [0, 1, 2],
@@ -23,30 +23,6 @@ class TicTacToe extends React.Component {
       [0, 4, 8],
       [2, 4, 6]
     ]
-  }
-
-  render() {
-    return (
-      <div>
-        <div id='status'>Time to start, X goes first</div>
-        <div className='row'>
-            {this.createBoard(0)}
-            {this.createBoard(1)}
-            {this.createBoard(2)}
-        </div>
-        <div className='row'>
-            {this.createBoard(3)}
-            {this.createBoard(4)}
-            {this.createBoard(5)}
-        </div>
-        <div className='row'>
-            {this.createBoard(6)}
-            {this.createBoard(7)}
-            {this.createBoard(8)}
-        </div>
-        <button onClick={()=> this.clearBoard()}>Clear Board</button>
-      </div>
-    );
   }
 
     createBoard(i){
@@ -63,37 +39,22 @@ class TicTacToe extends React.Component {
   
   status() {
     let statusBar = document.getElementById('status')
-    if(this.player === ''){
+    if(this.state.player === ''){
       statusBar.innerText = "It is O's turn"
     }else{
-      statusBar.innerText = "It is " +  this.player + "'s turn"
+      statusBar.innerText = "It is " +  this.state.player + "'s turn"
     }
   }
 
   playerTurn() {
-    if (this.player === 'X') {
-        this.player='O'
+    if (this.state.player === 'X') {
+      this.setState({player: 'O'})
     } else {
-        this.player = 'X'
+      this.setState({player: 'X'})
     }
-    return this.player
+     return this.state.player
   }
 
-  playChecker(num) {
-   // let squareValue = document.getElementById('square' + num)
-   let squareValue = this.state.playValue[num]
-    if (squareValue === '') {
-      this.status()
-      this.playerTurn()
-      //console.log(this.state.player)
-      let newPlayValue = this.state.playValue.slice()
-      newPlayValue[num] = this.player
-      this.setState({playValue: newPlayValue})
-      //this.setState(prevState => ({playValue: [...prevState.playValue, this.player]}))
-     // console.log(this.state.playValue)
-      this.checkWinner()
-    }
-  }
   checkWinner() {
     for (let i = 0; i < this.winState.length; i++) {
 
@@ -103,33 +64,72 @@ class TicTacToe extends React.Component {
       for (let x = 0; x < this.winState[i].length; x++){
 
         let position = this.winState[i][x];
-        let square = document.getElementById('square' + position).innerHTML
-
+       // let square = document.getElementById('square' + position).innerHTML
+        let square = this.state.playValue[position]
         if(square === "X"){
-          xWin = xWin +1
+          xWin = xWin + 1
+          
           if(xWin === 3){
             console.log("X WINS")
-            document.getElementById('status').innerText = "X Wins"
+            document.getElementById('status').innerText = "X is the Winner"
           }
           
         }else if(square === "O"){
           oWin = oWin + 1
           if(oWin === 3){
             console.log("O WINS")
-            document.getElementById('status').innerText = "O Wins"
+            document.getElementById('status').innerText = "O is the Winner"
           }
         }
       }
     }
   }
 
+  playChecker(num) {
+    let squareValue = this.state.playValue[num]
+     if (squareValue === '') {
+       this.playerTurn()
+       this.status()
+ 
+       let newPlayValue = this.state.playValue.slice()
+       newPlayValue[num] = this.state.player
+       this.setState({playValue: newPlayValue},()=> this.checkWinner(this.state.playValue))
+       //this.setState(()=>{return{playValue: newPlayValue}})
+       //this.checkWinner()
+     }
+   }
+
   clearBoard(){
-    console.log(this.playValue)
+    console.log(this.state.playValue)
     let newPlayValue = ['', '', '', '', '', '', '', '', '']
-    this.playValue= newPlayValue
-   
+    this.setState({playValue: newPlayValue})
+    this.setState({player: 'X'})
+    document.getElementById('status').innerText = "Time to start, X goes first"
   }
 
+  render() {
+    return (
+      <div>
+        <div id='status' className='header/footer'>Time to start, X goes first</div>
+        <div className='row'>
+            {this.createBoard(0)}
+            {this.createBoard(1)}
+            {this.createBoard(2)}
+        </div>
+        <div className='row'>
+            {this.createBoard(3)}
+            {this.createBoard(4)}
+            {this.createBoard(5)}
+        </div>
+        <div className='row'>
+            {this.createBoard(6)}
+            {this.createBoard(7)}
+            {this.createBoard(8)}
+        </div>
+        <div id="clear" className='headerfooter' onClick={()=> this.clearBoard()}>Clear Board</div>
+      </div>
+    );
+  }
 }
 
 ReactDOM.render(<TicTacToe />, document.getElementById('tic-tac-toe'));
