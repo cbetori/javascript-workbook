@@ -70,14 +70,14 @@ class TicTacToe extends React.Component {
           xWin = xWin + 1
           
           if(xWin === 3){
-            console.log("X WINS")
+            this.setState({winner: 'X'})
             document.getElementById('status').innerText = "X is the Winner"
           }
           
         }else if(square === "O"){
           oWin = oWin + 1
           if(oWin === 3){
-            console.log("O WINS")
+            this.setState({winner: 'O'})
             document.getElementById('status').innerText = "O is the Winner"
           }
         }
