@@ -7,7 +7,7 @@ class Checkers extends Component{
         color: 'black',
         king: false,
         index: 0,
-        locationArray: [8],
+        locationArray: [],
         startLocation: 
         [1,3,5,7,
         8,10,12,14,
@@ -17,42 +17,44 @@ class Checkers extends Component{
         56,58,60,62],
     }
 
-    createCheckersArray = () =>{
-        let locationArraySet = []
-        for(let i = 0; i < 64; i++){
-            locationArraySet.push('')
+    createCheckers = () =>{
+        let locationArraySet = this.state.locationArray
+            for(let i = 0; i < 64; i++){
+                if (this.state.startLocation.indexOf(i) != -1){
+                    locationArraySet.push(
+                        <div 
+                            type='button'
+                            key={i}
+                            id={'checker_'+i} 
+                            className='checker'
+                            onClick={() => this.handleClick(i)}>
+                        </div>
+                    )
+                }else{
+                    locationArraySet.push('')
+                }
         }
         this.setState({locationArray: locationArraySet})
     }
 
-    createCheckers = () =>{
-        let locationArraySet= []
-        this.state.startLocation.map((element, index)=>{
-            this.state.startLocation.map((startElement, startIndex)=>{
-                if (element === startElement){
-                    locationArraySet.push(
-                        <div 
-                            type='button'
-                            key={index}
-                            id={'checker_'+index} 
-                            className='checker'>
-                        </div>
-                    )
-                }
-            })
-        })
+    componentDidMount = () =>{
+        this.createCheckers()
+        console.log("mount")
+    }
+
+    handleClick = (index) =>{
+        console.log(index)
+       let  locationArraySet = this.state.locationArray.slice()
+       locationArraySet[index] = ''
         this.setState({locationArray: locationArraySet})
     }
 
-    componentDidMount = () =>{
-        this.createCheckersArray()
-        this.createCheckers()
-    }
 
     render(){
         return(
             <React.Fragment>
                 <Board checkersArray={this.state.locationArray}/>
+               {console.log(this.state.locationArray)}
             </React.Fragment>
         )
     }

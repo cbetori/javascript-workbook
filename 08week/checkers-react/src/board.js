@@ -7,22 +7,22 @@ class Board extends Component{
         value: [],
         squareColor: '',
         playervalue: 'O',
-        checkers: this.props.locationArray
+        checkersArray: this.props.checkersArray
     }
 
-    handleClick = (index) =>{
-        console.log(this.state.checkers)
-        let newValue = this.state.value.slice()
-        if (this.state.playervalue === 'O'){
-            newValue[index] = 'X'
-            this.setState({value: newValue})
-            this.setState({playervalue: 'X'})
-        }else{
-            newValue[index] = 'O'
-            this.setState({value: newValue})
-            this.setState({playervalue: 'O'})
-        }
-    }
+    // handleClick = (index) =>{
+    //     console.log(this.state.checkersArray)
+    //     let newValue = this.state.value.slice()
+    //     if (this.state.playervalue === 'O'){
+    //         newValue[index] = 'X'
+    //         this.setState({value: newValue})
+    //         this.setState({playervalue: 'X'})
+    //     }else{
+    //         newValue[index] = 'O'
+    //         this.setState({value: newValue})
+    //         this.setState({playervalue: 'O'})
+    //     }
+    // }
 
     createBoard = (index, color) =>{
         this.state.value.push(index)
@@ -32,20 +32,12 @@ class Board extends Component{
         }else{
             squareClass = 'square square_black'
         }
-        // let checker
-        // this.state.startLocation.map((startValue)=>{
-        //     if(index === startValue){
-        //         checker = <Checkers key={index}/>
-        //     }
-        // })
         return(
             <div
                 type='button' 
                 className={squareClass}
-                key={index} 
-                onClick={() => {this.handleClick(index)}}>
-                {/* {checker} */}
-        
+                key={index}>
+                {this.props.checkersArray[index]}
             </div>
         )
     }
