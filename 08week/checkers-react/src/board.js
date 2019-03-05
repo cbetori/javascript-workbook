@@ -10,20 +10,6 @@ class Board extends Component{
         checkersArray: this.props.checkersArray
     }
 
-    // handleClick = (index) =>{
-    //     console.log(this.state.checkersArray)
-    //     let newValue = this.state.value.slice()
-    //     if (this.state.playervalue === 'O'){
-    //         newValue[index] = 'X'
-    //         this.setState({value: newValue})
-    //         this.setState({playervalue: 'X'})
-    //     }else{
-    //         newValue[index] = 'O'
-    //         this.setState({value: newValue})
-    //         this.setState({playervalue: 'O'})
-    //     }
-    // }
-
     createBoard = (index, color) =>{
         this.state.value.push(index)
         let squareClass
@@ -36,10 +22,24 @@ class Board extends Component{
             <div
                 type='button' 
                 className={squareClass}
-                key={index}>
+                key={index}
+                onDrop={(event)=>this.handleDrop(event,index)}
+                onDragOver={(event)=>this.allowDrop(event)}
+                >
                 {this.props.checkersArray[index]}
             </div>
         )
+    }
+
+    handleDrop =(event,index)=>{
+        event.preventDefault();
+        let data = event.dataTransfer.getData('button');
+        event.target.appendChild(document.getElementById(data));
+        this.props.handleMove(index)
+    }
+
+    allowDrop = (event) =>{
+        event.preventDefault();
     }
 
     render(){

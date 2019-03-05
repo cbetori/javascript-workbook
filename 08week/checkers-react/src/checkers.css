@@ -1,8 +1,19 @@
-.checker{
-    color: blue;
-    background-color:blue;
+.checker_red{
+    background: red;
     margin: 10px;
     width: 25px;
     height: 25px;
     border-radius: 50%;
+}
+
+.checker_black{
+    background: black;
+    margin: 10px;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+}
+
+.checker:active{
+    opacity: 50%;
 }

@@ -7,6 +7,7 @@ class Checkers extends Component{
         color: 'black',
         king: false,
         index: 0,
+        selectedChecker: 0,
         locationArray: [],
         startLocation: 
         [1,3,5,7,
@@ -18,16 +19,26 @@ class Checkers extends Component{
     }
 
     createCheckers = () =>{
-        let locationArraySet = this.state.locationArray
+        let locationArraySet = []
+        //Give checkers a count from 1-24
+        let checkerCount = 0
             for(let i = 0; i < 64; i++){
+                //Dedermine Color
+                let checkerColor = 'red'
+                if (checkerCount>11){
+                    checkerColor = 'black'
+                }
                 if (this.state.startLocation.indexOf(i) != -1){
+                    checkerCount = checkerCount + 1
                     locationArraySet.push(
                         <div 
                             type='button'
                             key={i}
-                            id={'checker_'+i} 
-                            className='checker'
-                            onClick={() => this.handleClick(i)}>
+                            id={'checker_'+checkerCount} 
+                            className={'checker checker_'+checkerColor}
+                            draggable = 'true'
+                            onDragStart={(event)=>this.handleDrag(event, i)}
+                            >
                         </div>
                     )
                 }else{
@@ -35,26 +46,47 @@ class Checkers extends Component{
                 }
         }
         this.setState({locationArray: locationArraySet})
+        console.log('whatakjfd')
     }
 
     componentDidMount = () =>{
         this.createCheckers()
-        console.log("mount")
     }
 
-    handleClick = (index) =>{
-        console.log(index)
-       let  locationArraySet = this.state.locationArray.slice()
-       locationArraySet[index] = ''
+    // handleSelection = (index) =>{
+    //     this.setState({selectedChecker: index})
+    // }
+
+    handleDrag = (event, index) =>{
+        event.dataTransfer.setData('button',event.target.id)
+        this.setState({selectedChecker: index})
+    }
+
+    handleMove = (index) =>{
+        let locationArraySet = this.state.locationArray.slice()
+
+        let selection = this.state.selectedChecker
+        locationArraySet[index] = locationArraySet[selection]
+        this.setState({locationArray: locationArraySet})
+        this.handleOldLocation()
+    }
+
+    handleOldLocation = () =>{
+        let selection = this.state.selectedChecker
+        console.log("old")
+        let locationArraySet = this.state.locationArray.slice()
+        locationArraySet[selection] = ''
         this.setState({locationArray: locationArraySet})
     }
-
 
     render(){
         return(
             <React.Fragment>
-                <Board checkersArray={this.state.locationArray}/>
-               {console.log(this.state.locationArray)}
+                <Board 
+                    checkersArray={this.state.locationArray} 
+                    handleMove={this.handleMove} 
+                />
+                {console.log(this.state.locationArray)}
             </React.Fragment>
         )
     }
