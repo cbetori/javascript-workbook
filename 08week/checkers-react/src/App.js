@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
-import { Container, Jumbotron } from 'reactstrap';
+import { Container } from 'reactstrap';
 
 import './App.css';
-import Board from './Board'
+
 import Checkers from './Checkers'
+import Scoreboard from  './Scoreboard'
 
 class App extends Component {
   render() {
     return (
       <Container className="App">
-       <Checkers/>
+        <Checkers/>
       </Container>
     );
   }

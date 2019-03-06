@@ -4,27 +4,22 @@ import Checkers from './Checkers'
 
 class Board extends Component{
     state = {
-        value: [],
+        //value: [],
         squareColor: '',
         playervalue: 'O',
-        checkersArray: this.props.checkersArray
+        //checkersArray: this.props.checkersArray
     }
 
     createBoard = (index, color) =>{
-        this.state.value.push(index)
-        let squareClass
-        if(color === 'white'){
-            squareClass = 'square square_white'
-        }else{
-            squareClass = 'square square_black'
-        }
+       // this.state.value.push(index)
         return(
             <div
                 type='button' 
-                className={squareClass}
+                className={'square square_'+color}
                 key={index}
+                id={index}
+                onDragOver={(event)=>this.allowDrop(event, index)}
                 onDrop={(event)=>this.handleDrop(event,index)}
-                onDragOver={(event)=>this.allowDrop(event)}
                 >
                 {this.props.checkersArray[index]}
             </div>
@@ -34,11 +29,12 @@ class Board extends Component{
     handleDrop =(event,index)=>{
         event.preventDefault();
         let data = event.dataTransfer.getData('button');
+        console.log(index)
         event.target.appendChild(document.getElementById(data));
         this.props.handleMove(index)
     }
 
-    allowDrop = (event) =>{
+    allowDrop = (event, index) =>{
         event.preventDefault();
     }
 
