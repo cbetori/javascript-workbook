@@ -1,21 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react'
 import './css/board.css'
-import checkerLocation from './Checkers'
 
-function createSquare(index, color) {
-    return(
-        <div
-            type='button' 
-            className={'square square_'+color}
-            id={index}
-            >
-            {checkerLocation[index]}
-        </div>
-    )
-}
+export default  function Board(props){
 
+    function createSquare(index, color) {
+        return(
+            <div
+                type='button' 
+                className={'square square_'+color}
+                id={'square_'+index}
+                key={index}
+                onClick={()=>callClick(index)}
+                >
+                {props.checkerLocation[index]}
+            </div>
+        )
+    }
 
-function Board(){
+    function callClick(index){
+        props.handleCheckerClick(index)
+    }
+
     return(
         <React.Fragment>
         <div className='boardRow'>
@@ -101,6 +106,3 @@ function Board(){
     </React.Fragment>
     )
 }
-
-
-export default Board
