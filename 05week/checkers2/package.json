@@ -1,0 +1,9 @@
+{
+    "scripts": {
+        "start": "node checkers.js",
+        "test": "mocha"
+    },
+    "devDependencies": {
+        "mocha": "^5.2.0"
+    }
+}
