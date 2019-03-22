@@ -16,3 +16,22 @@ div[data-cell] {
   clear: both;
   font-size: 50px;
 }
+
+#status{
+  font-size: 25pt;
+  font-weight: bolder
+}
+
+#clear{
+  display: block;
+  font-weight: bolder;
+  max-width: 150px;
+  min-height: 30px;
+  margin-left: 75px;
+  margin-top: 110px;
+  padding-top: 5px;
+  cursor: pointer;
+  text-align: center;
+  background-color: darkslategrey;
+  color: #f2f2f2
+}

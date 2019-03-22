@@ -1,0 +1,16 @@
+.checker{
+    width: 25px;
+    height: 25px;
+    margin: 10px;
+
+    border-radius: 50%;
+
+}
+
+.checker_red{
+    background-color: red;
+}
+
+.checker_black{
+    background-color: black;
+}
