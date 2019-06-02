@@ -1,0 +1,9 @@
+{
+    "scripts": {
+        "start": "node tests.js",
+        "test": "mocha"
+    },
+    "dependencies": {
+        "mocha": "^5.2.0"
+    }
+}
