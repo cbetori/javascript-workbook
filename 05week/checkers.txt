@@ -51,8 +51,18 @@ class Board {
     }
     console.log(string);
   }
+  // Insert pieces here
+  checkers(){
+    for(let row = 0; row < 8; row++){
+      for(let column = 0; column < 8; column++){
+        console.log("test")
+        if( row != 3 || row != 4){
+          this.viewGrid[row][column] = 0
+        }
+      }
+    }
+  }
 
-  // Your code here
 }
 
 class Game {
@@ -61,6 +71,7 @@ class Game {
   }
   start() {
     this.board.createGrid();
+    this.board.checkers();
   }
 }
 
